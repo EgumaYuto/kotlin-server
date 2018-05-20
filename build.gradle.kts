@@ -30,7 +30,14 @@ repositories {
 }
 
 dependencies {
-    compile(kotlinModule("stdlib-jdk8", kotlinVersion))
+    // kotlin
+    compile(kotlin("stdlib-jdk8", kotlinVersion))
+
+    // log4j2
+    compile("org.apache.logging.log4j", "log4j-core", "2.11.0")
+    compile("org.apache.logging.log4j", "log4j-api", "2.11.0")
+
+    // junit
     testCompile("junit", "junit", "4.12")
 }
 
