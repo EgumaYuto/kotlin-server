@@ -31,10 +31,10 @@ fun main(args: Array<String>) {
                     writeHttpResponse(it)
                 }
             } catch (e: IOException) {
-                logger.error("failuer http request handling", e)
+                logger.error("failure http request handling", e)
             }
         } catch (e: Exception) {
-            logger.error("failuer to accept http request", e)
+            logger.error("failure to accept http request", e)
         }
     }
 }
