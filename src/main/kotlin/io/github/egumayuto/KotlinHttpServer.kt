@@ -1,6 +1,8 @@
 package io.github.egumayuto
 
 import io.github.egumayuto.http.HttpRequest
+import io.github.egumayuto.http.HttpResponse
+import io.github.egumayuto.http.HttpStatus
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.io.BufferedWriter
@@ -44,14 +46,11 @@ fun getHttpRequest(socket: Socket): HttpRequest {
 fun writeHttpResponse(socket: Socket) {
     socket.getOutputStream().use { outputStream ->
         BufferedWriter(OutputStreamWriter(outputStream)).use { bufferedReader ->
-            bufferedReader.write("HTTP/1.1 200 OK\n" +
-                "Date: Sun, 11 Jan 2004 16:06:23 GMT\n" +
-                "Content-Type: text/html\n" +
-                "\n" +
-                "<!DOCTYPE html>\n" +
-                "<html>\n" +
-                "  <body>Sample response</body>\n" +
-                "</html>\n")
+            val response = HttpResponse(HttpStatus.OK, "<!DOCTYPE html>\n" +
+                    "<html>\n" +
+                    "  <body>Sample response</body>\n" +
+                    "</html>\n")
+            bufferedReader.write(response.toString())
         }
     }
 }
