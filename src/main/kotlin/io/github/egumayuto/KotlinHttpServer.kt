@@ -1,11 +1,10 @@
 package io.github.egumayuto
 
+import io.github.egumayuto.http.HttpRequest
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.IOException
-import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.ServerSocket
 import java.net.Socket
@@ -38,21 +37,14 @@ fun main(args: Array<String>) {
     }
 }
 
-fun getHttpRequest(socket: Socket): String {
-    val br = BufferedReader(InputStreamReader(socket.getInputStream()))
-        val sb = StringBuilder()
-        var line = br.readLine()
-        while (line != null && !line.isEmpty()) {
-            sb.append(line).append("\n")
-            line = br.readLine()
-        }
-        return sb.toString()
+fun getHttpRequest(socket: Socket): HttpRequest {
+    return HttpRequest(socket.getInputStream())
 }
 
 fun writeHttpResponse(socket: Socket) {
     socket.getOutputStream().use { outputStream ->
-        val br = BufferedWriter(OutputStreamWriter(outputStream))
-        br.write("HTTP/1.1 200 OK\n" +
+        BufferedWriter(OutputStreamWriter(outputStream)).use { bufferedReader ->
+            bufferedReader.write("HTTP/1.1 200 OK\n" +
                 "Date: Sun, 11 Jan 2004 16:06:23 GMT\n" +
                 "Content-Type: text/html\n" +
                 "\n" +
@@ -60,5 +52,6 @@ fun writeHttpResponse(socket: Socket) {
                 "<html>\n" +
                 "  <body>Sample response</body>\n" +
                 "</html>\n")
+        }
     }
 }
