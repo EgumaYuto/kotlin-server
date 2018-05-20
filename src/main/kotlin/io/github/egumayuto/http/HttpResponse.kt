@@ -1,13 +1,10 @@
 package io.github.egumayuto.http
 
+import io.github.egumayuto.util.HttpStringUtil
+
 /**
  * @author cabos
  */
-private const val CR = "\r"
-private const val LF = "\n"
-private const val CRLF = CR + LF
-private const val SP = " "
-
 class HttpResponse(private val httpStatus: HttpStatus, private val body: String) {
 
     private val httpVersion: String = "HTTP/1.1"
@@ -15,11 +12,11 @@ class HttpResponse(private val httpStatus: HttpStatus, private val body: String)
 
     override fun toString(): String {
         val sb = StringBuilder()
-        sb.append("$httpVersion$SP${httpStatus.code}$SP$httpStatus")
+        sb.append("$httpVersion${HttpStringUtil.SP}${httpStatus.code}${HttpStringUtil.SP}$httpStatus")
         this.responseHeaderMap.forEach({ entry ->
-            sb.append("${entry.key}: ${entry.value}$CRLF")
+            sb.append("${entry.key}: ${entry.value}${HttpStringUtil.CRLF}")
         })
-        sb.append(CRLF)
+        sb.append(HttpStringUtil.CRLF)
         sb.append(body)
         return sb.toString()
     }

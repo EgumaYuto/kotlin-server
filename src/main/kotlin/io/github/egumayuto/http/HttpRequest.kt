@@ -1,5 +1,6 @@
 package io.github.egumayuto.http
 
+import io.github.egumayuto.util.HttpStringUtil
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -7,11 +8,6 @@ import java.io.InputStreamReader
 /**
  * @author cabos
  */
-private const val CR = "\r"
-private const val LF = "\n"
-private const val CRLF = CR + LF
-private const val SP = " "
-
 class HttpRequest(inputStream: InputStream) {
 
     /** request line */
@@ -42,7 +38,7 @@ class HttpRequest(inputStream: InputStream) {
     }
 
     private fun createRequestLineElementList(firstLine: String): List<String> {
-        val firstLineElementList = firstLine.split(SP)
+        val firstLineElementList = firstLine.split(HttpStringUtil.SP)
         if (firstLineElementList.size != 3) {
             throw IllegalArgumentException("incorrect http request. first line : $firstLine")
         }
@@ -59,7 +55,7 @@ class HttpRequest(inputStream: InputStream) {
         val sb = StringBuilder()
         sb.append("${this.method} ${this.httpVersion} ${this.httpVersion}")
         this.requestHeaderMap.forEach({ entry ->
-            sb.append("${entry.key}: ${entry.value}$CRLF")
+            sb.append("${entry.key}: ${entry.value}${HttpStringUtil.CRLF}")
         })
         return sb.toString()
     }
