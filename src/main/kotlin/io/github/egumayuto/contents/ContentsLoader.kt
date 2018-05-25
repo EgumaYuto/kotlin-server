@@ -21,17 +21,17 @@ fun loadContents(contentsPath: String): ContentsLoadResult {
                 return loadContentsIfCanRead(indexFile)
             }
         }
-        return ContentsLoadResult(Contents(), ContentsLoadResultType.notExists)
+        return ContentsLoadResult(Contents(file.canonicalPath), ContentsLoadResultType.notExists)
     } catch (e: IOException) {
-        return ContentsLoadResult(Contents(), ContentsLoadResultType.loadFailure)
+        return ContentsLoadResult(Contents(file.canonicalPath), ContentsLoadResultType.loadFailure)
     }
 }
 
 private fun loadContentsIfCanRead(file: File): ContentsLoadResult {
     val filePath = file.canonicalPath
     return if (file.canRead()) {
-        ContentsLoadResult(Contents(Files.readAllBytes(Paths.get(filePath))), ContentsLoadResultType.loadSuccess)
+        ContentsLoadResult(Contents(filePath, Files.readAllBytes(Paths.get(filePath))), ContentsLoadResultType.loadSuccess)
     } else {
-        ContentsLoadResult(Contents(), ContentsLoadResultType.forbidden)
+        ContentsLoadResult(Contents(filePath), ContentsLoadResultType.forbidden)
     }
 }
