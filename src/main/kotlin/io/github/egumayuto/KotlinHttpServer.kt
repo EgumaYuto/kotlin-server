@@ -1,5 +1,6 @@
 package io.github.egumayuto
 
+import io.github.egumayuto.contents.loadContents
 import io.github.egumayuto.http.HttpRequest
 import io.github.egumayuto.http.HttpResponse
 import io.github.egumayuto.http.HttpStatus
@@ -27,8 +28,10 @@ fun main(args: Array<String>) {
             val socket = serverSocket.accept()
             try {
                 socket.use {
-                    logger.info(getHttpRequest(it))
-                    writeHttpResponse(it)
+                    val request = getHttpRequest(it)
+                    logger.info(request)
+                    writeHttpResponse(it, request)
+
                 }
             } catch (e: IOException) {
                 logger.error("failure http request handling", e)
@@ -43,14 +46,8 @@ fun getHttpRequest(socket: Socket): HttpRequest {
     return HttpRequest(socket.getInputStream())
 }
 
-fun writeHttpResponse(socket: Socket) {
+fun writeHttpResponse(socket: Socket, request: HttpRequest) {
     socket.getOutputStream().use { outputStream ->
-        BufferedWriter(OutputStreamWriter(outputStream)).use { bufferedReader ->
-            val response = HttpResponse(HttpStatus.OK, "<!DOCTYPE html>\n" +
-                    "<html>\n" +
-                    "  <body>Sample response</body>\n" +
-                    "</html>\n")
-            bufferedReader.write(response.toString())
-        }
+        outputStream.write(HttpResponse(HttpStatus.OK, loadContents(request.requestTarget).contents.data).binaryResponse)
     }
 }

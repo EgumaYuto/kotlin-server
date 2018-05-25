@@ -11,11 +11,11 @@ import java.io.InputStreamReader
 class HttpRequest(inputStream: InputStream) {
 
     /** request line */
-    private val method: String
-    private val requestTarget: String
-    private val httpVersion: String
+    val method: String
+    val requestTarget: String
+    val httpVersion: String
     /** request header */
-    private val requestHeaderMap: Map<String, String>
+    val requestHeaderMap: Map<String, String>
 
     init {
         val lineList = convertToMessageLineList(inputStream)
