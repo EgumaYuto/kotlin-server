@@ -47,8 +47,8 @@ class HttpRequest(inputStream: InputStream) {
 
     private fun createRequestHeaderMap(lineList: List<String>): Map<String, String> {
         return lineList.subList(1, lineList.size - 1)
-                .map ({ line -> line.split(":".toRegex(), 2) })
-                .associateBy({ it[0] }, {it[1]})
+                .map({ line -> line.split(":".toRegex(), 2) })
+                .associateBy({ it[0] }, { it[1] })
     }
 
     override fun toString(): String {

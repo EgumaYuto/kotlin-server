@@ -6,9 +6,7 @@ import io.github.egumayuto.http.HttpResponse
 import io.github.egumayuto.http.HttpStatus
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import java.io.BufferedWriter
 import java.io.IOException
-import java.io.OutputStreamWriter
 import java.net.ServerSocket
 import java.net.Socket
 

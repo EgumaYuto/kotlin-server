@@ -8,7 +8,7 @@ import java.nio.file.Paths
 /**
  * @author cabos
  */
-private val CONTENTS_ROOT:String = File("./").canonicalPath + "/src/main/resources/public"
+private val CONTENTS_ROOT: String = File("./").canonicalPath + "/src/main/resources/public"
 
 fun loadContents(contentsPath: String): ContentsLoadResult {
     val file = File(CONTENTS_ROOT + contentsPath)
