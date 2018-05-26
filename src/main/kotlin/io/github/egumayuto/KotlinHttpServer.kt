@@ -9,6 +9,8 @@ import java.io.IOException
 import java.net.ServerSocket
 import java.net.Socket
 
+import kotlin.concurrent.thread
+
 /**
  * @author cabos
  */
@@ -24,12 +26,14 @@ fun main(args: Array<String>) {
         try {
             val socket = serverSocket.accept()
             try {
-                socket.use {
-                    val request = getHttpRequest(it)
-                    logger.info(request)
-                    val response = handle(request)
-                    logger.info(response.responseHeaderString)
-                    writeHttpResponse(socket, response)
+                thread {
+                    socket.use {
+                        val request = getHttpRequest(it)
+                        logger.info(request)
+                        val response = handle(request)
+                        logger.info(response.responseHeaderString)
+                        writeHttpResponse(socket, response)
+                    }
                 }
             } catch (e: IOException) {
                 logger.error("failure http request handling", e)
