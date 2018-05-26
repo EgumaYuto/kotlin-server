@@ -1,9 +1,8 @@
 package io.github.egumayuto
 
-import io.github.egumayuto.contents.loadContents
 import io.github.egumayuto.http.HttpRequest
 import io.github.egumayuto.http.HttpResponse
-import io.github.egumayuto.http.HttpStatus
+import io.github.egumayuto.http.handle
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.io.IOException
@@ -28,8 +27,9 @@ fun main(args: Array<String>) {
                 socket.use {
                     val request = getHttpRequest(it)
                     logger.info(request)
-                    writeHttpResponse(it, request)
-
+                    val response = handle(request)
+                    logger.info(response.responseHeaderString)
+                    writeHttpResponse(socket, response)
                 }
             } catch (e: IOException) {
                 logger.error("failure http request handling", e)
@@ -44,8 +44,8 @@ fun getHttpRequest(socket: Socket): HttpRequest {
     return HttpRequest(socket.getInputStream())
 }
 
-fun writeHttpResponse(socket: Socket, request: HttpRequest) {
+fun writeHttpResponse(socket: Socket, response: HttpResponse) {
     socket.getOutputStream().use { outputStream ->
-        outputStream.write(HttpResponse(HttpStatus.OK, loadContents(request.requestTarget).contents.data).binaryResponse)
+        outputStream.write(response.binaryResponse)
     }
 }
