@@ -5,9 +5,11 @@
 html {
     font-size: 62.5%;
 }
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
 body {
     background: #151515 url('../images/login-background.jpg') no-repeat fixed left bottom;
     background-size: cover;
@@ -16,15 +18,18 @@ body {
     font-size: 1.4rem;
     font-family: Raleway, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
+
 /***************
  * header
  **************/
 .header {
     padding: 170px 30px 80px;
 }
+
 .site-title-sub {
     margin: 0 0 30px;
 }
+
 .site-title-sub::before,
 .site-title-sub::after {
     content: '';
@@ -35,15 +40,18 @@ body {
     background-color: #fff;
     vertical-align: middle;
 }
+
 .site-title {
     margin: 50px 0 40px;
     font-size: 7.6rem;
 }
+
 .site-description {
     margin-bottom: 50px;
     color: #888;
     font-size: 1.6rem;
 }
+
 .button {
     display: inline-block;
     width: 200px;
@@ -55,15 +63,19 @@ body {
     letter-spacing: 1px;
     font-size: 1.2rem;
 }
+
 .button:hover {
     opacity: 0.9;
 }
+
 .button-showy {
     background-color: #f1b400;
 }
+
 .buttons .button {
     margin: 10px;
 }
+
 .heading {
     position: relative;
     display: inline-block;
@@ -72,6 +84,7 @@ body {
     letter-spacing: 2px;
     font-size: 4rem;
 }
+
 .heading::before,
 .heading::after {
     content: '';
@@ -81,9 +94,11 @@ body {
     left: 0;
     border-bottom: 1px solid #999;
 }
+
 .heading::before {
     bottom: 5px;
 }
+
 /***************
  * about section
  **************/
@@ -92,14 +107,17 @@ body {
     background-color: #fff;
     color: #333;
 }
+
 .about-text {
     margin: 30px 0;
     line-height: 2.5;
 }
+
 .footer {
     padding: 12px 0;
     font-size: 1.3rem;
 }
+
 /***************
  * festival
  **************/
@@ -109,13 +127,16 @@ body {
     background-size: cover;
     color: #fff;
 }
+
 .festival-text {
     margin: 30px 0;
     line-height: 2.5;
 }
+
 .festival a {
     color: #fff;
 }
+
 /***************
  * Disc
  **************/
@@ -124,11 +145,13 @@ body {
     background-color: #fff;
     color: #333;
 }
+
 .cabos-disc {
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
 }
+
 /***************
  * Fashion
  **************/
@@ -138,10 +161,12 @@ body {
     color: #fff;
     opacity: 0.6;
 }
+
 .horizontal-stripe {
     background-color: #333;
     background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 }
+
 /***************
  * Footer
  **************/
@@ -149,6 +174,7 @@ body {
     background-color: #fff;
     color: #333;
 }
+
 /*********************
  * smp settings
  ********************/
@@ -163,26 +189,33 @@ body {
         margin: 10px auto;
         font-size: 1.7rem;
     }
+
     .site-title {
         margin-top: 35px;
         font-size: 5rem;
     }
+
     .header {
         padding-top: 60px;
     }
+
     .button:hover {
         opacity: 1;
     }
+
     .heading {
         font-size: 2.5rem;
     }
+
     body {
         font-size: 1.3rem;
     }
+
     .about-text {
         line-height: 1.8;
     }
 }
+
 @media (max-width: 1024px) {
     body {
         background-image: none;
